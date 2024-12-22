@@ -5,7 +5,7 @@ import lombok.*;
 import med.voll.api.address.Address;
 
 @Entity
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
