@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Address {
    private String street;
    private String neighborhood;
@@ -17,6 +16,8 @@ public class Address {
    private String state;
    private String addressAdditions;
    private String number;
+
+   public Address(){}
 
    public Address(AddressData address) {
       this.street = address.street();
