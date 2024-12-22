@@ -9,4 +9,6 @@ public record AddressData(
         String addressAdditions,
         String number
 ) {
+    public static class Address {
+    }
 }
