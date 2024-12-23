@@ -1,9 +1,9 @@
-package med.voll.api.doctor;
+package med.voll.api.domain.doctor;
 
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
-import med.voll.api.address.Address;
+import med.voll.api.domain.address.Address;
 
 @Entity
 @Data
@@ -19,6 +19,7 @@ public class Doctor {
     private String email;
     private String crm;
     private String phone;
+    private Boolean active;
 
     @Enumerated(EnumType.STRING)
     private Speciality speciality;
@@ -31,6 +32,7 @@ public class Doctor {
         this.email = request.email();
         this.crm = request.crm();
         this.phone = request.phone();
+        this.active = true;
         this.speciality = request.speciality();
         this.address = new Address(request.address());
     }
@@ -48,5 +50,9 @@ public class Doctor {
         if(request.address() != null) {
             this.address.updateAddressInfo(request.address());
         }
+    }
+
+    public void deactivate() {
+        this.active = false;
     }
 }
