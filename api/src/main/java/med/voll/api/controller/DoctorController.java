@@ -2,10 +2,7 @@ package med.voll.api.controller;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import med.voll.api.doctor.Doctor;
-import med.voll.api.doctor.DoctorCreatingData;
-import med.voll.api.doctor.DoctorListingData;
-import med.voll.api.doctor.DoctorRepository;
+import med.voll.api.doctor.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,11 +18,13 @@ public class DoctorController {
     @Autowired
     private DoctorRepository repository;
 
+
     @PostMapping
     @Transactional
     public void createDoctor(@RequestBody @Valid DoctorCreatingData request) {
         repository.save(new Doctor(request));
     }
+
 
     @GetMapping
     public Page<DoctorListingData> listDoctors(@PageableDefault(size = 10, sort = {"name"}) Pageable page) {
@@ -35,4 +34,10 @@ public class DoctorController {
     }
 
 
+    @PutMapping
+    @Transactional
+    public void updateDoctor(@RequestBody @Valid DoctorUpdatingData request){
+        Doctor doctor = repository.findById(request.id()).get();
+        doctor.updateDoctorData(request);
+    }
 }
