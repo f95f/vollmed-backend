@@ -40,4 +40,11 @@ public class DoctorController {
         Doctor doctor = repository.findById(request.id()).get();
         doctor.updateDoctorData(request);
     }
+
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void deleteDoctor(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
 }
